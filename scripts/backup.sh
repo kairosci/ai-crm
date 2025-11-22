@@ -55,7 +55,7 @@ fi
 # Clean up old backups
 echo ""
 echo "Cleaning up old backups (older than ${RETENTION_DAYS} days)..."
-find "${BACKUP_DIR}" -name "crm_backup_*.sql.gz" -mtime +${RETENTION_DAYS} -delete
+find "${BACKUP_DIR}" -name "crm_backup_*.sql.gz" -mtime +"${RETENTION_DAYS}" -delete
 echo -e "${GREEN}✓${NC} Cleanup complete"
 
 # List recent backups

@@ -15,8 +15,7 @@ LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
 
 # Create logs directory if it doesn't exist
 log_dir = "logs"
-if not os.path.exists(log_dir):
-    os.makedirs(log_dir)
+os.makedirs(log_dir, exist_ok=True)
 
 # Setup logging handlers
 handlers = [

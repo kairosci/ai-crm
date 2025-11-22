@@ -41,7 +41,7 @@ fi
 echo -e "${GREEN}✓${NC} Docker and Docker Compose are installed"
 
 # Check if postgres password is still default
-POSTGRES_PASS=$(grep "^POSTGRES_PASSWORD=" .env | cut -d'=' -f2- | tr -d ' "'\''')
+POSTGRES_PASS=$(grep "^POSTGRES_PASSWORD=" .env | cut -d'=' -f2-)
 if [ "$POSTGRES_PASS" = "postgres" ]; then
     echo -e "${YELLOW}Warning: Using default PostgreSQL password${NC}"
     echo "It's highly recommended to change it in production"

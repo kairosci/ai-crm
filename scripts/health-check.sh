@@ -68,7 +68,7 @@ fi
 # Check Frontend (if running in Docker)
 if docker-compose ps frontend 2>/dev/null | grep -q "running"; then
     echo -n "Checking Frontend... "
-    if docker-compose exec -T frontend node -e "require('http').get('http://localhost:3000', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})" 2>/dev/null; then
+    if docker-compose exec -T frontend wget --no-verbose --tries=1 --spider http://localhost:3000 2>/dev/null; then
         echo -e "${GREEN}✓ Healthy${NC}"
     else
         echo -e "${YELLOW}⚠ Frontend container running but health check failed${NC}"
