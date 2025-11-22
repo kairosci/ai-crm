@@ -114,7 +114,6 @@ export default function ChatPlugin() {
   };
 
   const handleSuggestionClick = (suggestion: string) => {
-    setInput(suggestion);
     sendMessage(suggestion);
   };
 
@@ -219,8 +218,8 @@ export default function ChatPlugin() {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Quick Suggestions */}
-          {messages.length === 1 && (
+          {/* Quick Suggestions - Show only with welcome message */}
+          {messages.length === 1 && messages[0].role === 'assistant' && (
             <div className="px-4 pb-2 space-x-2 flex overflow-x-auto">
               {getContextualSuggestions().map((suggestion, idx) => (
                 <button
