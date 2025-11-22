@@ -9,6 +9,14 @@ interface Message {
   content: string;
 }
 
+const WELCOME_MESSAGE = `Hello! I'm your AI CRM assistant. I can help you manage contacts, pipelines, deals, and tasks. Just ask me in natural language!
+
+For example:
+• "Create a new contact named John Doe with email john@example.com"
+• "Show me all contacts"
+• "Create a pipeline called Sales Pipeline"
+• "Create a deal worth $50000"`;
+
 export default function ChatPlugin() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
@@ -16,6 +24,7 @@ export default function ChatPlugin() {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
+  const [showSuggestions, setShowSuggestions] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
@@ -23,7 +32,7 @@ export default function ChatPlugin() {
   useEffect(() => {
     const welcomeMessage: Message = {
       role: 'assistant',
-      content: 'Hello! I\'m your AI CRM assistant. I can help you manage contacts, pipelines, deals, and tasks. Just ask me in natural language!\n\nFor example:\n• "Create a new contact named John Doe with email john@example.com"\n• "Show me all contacts"\n• "Create a pipeline called Sales Pipeline"\n• "Create a deal worth $50000"'
+      content: WELCOME_MESSAGE
     };
     setMessages([welcomeMessage]);
   }, []);
@@ -67,6 +76,7 @@ export default function ChatPlugin() {
     setMessages(prev => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
+    setShowSuggestions(false); // Hide suggestions after first interaction
 
     try {
       const response = await chatApi.send(textToSend);
@@ -218,8 +228,8 @@ export default function ChatPlugin() {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Quick Suggestions - Show only with welcome message */}
-          {messages.length === 1 && messages[0].role === 'assistant' && (
+          {/* Quick Suggestions - Show only before first user interaction */}
+          {showSuggestions && (
             <div className="px-4 pb-2 space-x-2 flex overflow-x-auto">
               {getContextualSuggestions().map((suggestion, idx) => (
                 <button
