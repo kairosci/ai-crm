@@ -23,7 +23,7 @@ export default function PipelinesPage() {
       setPipelines(pipelinesData);
       setDeals(dealsData);
       setError(null);
-    } catch (err) {
+    } catch {
       setError('Failed to load data. Please check if the backend is running.');
     } finally {
       setIsLoading(false);
@@ -70,7 +70,7 @@ export default function PipelinesPage() {
         <div className="bg-white shadow rounded-lg p-8 text-center">
           <p className="text-gray-600">No pipelines yet. Use the AI Chat to create a pipeline!</p>
           <p className="text-sm text-gray-500 mt-2">
-            Try: "Create a pipeline called Sales Pipeline"
+            Try: &quot;Create a pipeline called Sales Pipeline&quot;
           </p>
         </div>
       ) : (

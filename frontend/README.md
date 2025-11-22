@@ -1,4 +1,13 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Enterprise CRM Frontend
+
+This is a [Next.js](https://nextjs.org) project for the Enterprise CRM system with an AI-powered chat plugin.
+
+## Key Features
+
+- **Floating AI Chat Plugin**: Always-accessible AI assistant that appears as a floating widget
+- **Contextual Suggestions**: Smart quick actions based on the current page
+- **Modern UI/UX**: Smooth animations, gradient styling, and polished interactions
+- **Responsive Design**: Works seamlessly across devices
 
 ## Getting Started
 
