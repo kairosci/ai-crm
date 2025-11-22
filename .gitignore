@@ -44,6 +44,16 @@ dist/
 .env.test.local
 .env.production.local
 
+# SSL certificates
+nginx/ssl/*.pem
+nginx/ssl/*.key
+nginx/ssl/*.crt
+
+# Backups
+backups/
+*.sql
+*.sql.gz
+
 # IDEs
 .vscode/
 .idea/
