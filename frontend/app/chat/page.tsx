@@ -33,7 +33,7 @@ export default function ChatPage() {
         content: response.response
       };
       setMessages(prev => [...prev, assistantMessage]);
-    } catch (error) {
+    } catch {
       const errorMessage: Message = {
         role: 'assistant',
         content: 'Sorry, I encountered an error. Please make sure the backend is running and try again.'

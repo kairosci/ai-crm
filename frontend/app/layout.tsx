@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ChatPlugin from "@/components/ChatPlugin";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -50,12 +51,6 @@ export default function RootLayout({
                     >
                       Tasks
                     </Link>
-                    <Link
-                      href="/chat"
-                      className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                    >
-                      AI Chat
-                    </Link>
                   </div>
                 </div>
               </div>
@@ -64,6 +59,7 @@ export default function RootLayout({
           <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             {children}
           </main>
+          <ChatPlugin />
         </div>
       </body>
     </html>
