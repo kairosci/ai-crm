@@ -2,12 +2,29 @@
 
 An Enterprise CRM system built with Next.js, FastAPI, and PostgreSQL, featuring AI-powered chat assistance using local LLM via llama-cpp-python.
 
+## 🚀 Quick Start
+
+Get started in under 5 minutes with Docker:
+
+```bash
+git clone https://github.com/kairosci/ai-crm.git
+cd ai-crm
+cp .env.example .env
+make deploy
+```
+
+Access at http://localhost
+
+📖 **See [QUICKSTART.md](QUICKSTART.md)** for detailed setup instructions  
+🏭 **See [PRODUCTION.md](PRODUCTION.md)** for production deployment
+
 ## Features
 
 - **Contacts Management**: Add, view, and manage customer contacts
 - **Pipeline Tracking**: Organize deals through customizable sales pipelines
 - **Task Management**: Create and track tasks with priority levels
 - **AI Chat Assistant**: Natural language interface to manage CRM operations using local LLM (no external API required)
+- **Production Ready**: Docker, nginx, SSL/TLS, monitoring, backups
 
 ## Technology Stack
 
@@ -234,11 +251,55 @@ frontend/
     └── api.ts           # API client
 ```
 
+## Production Deployment
+
+The project includes complete production infrastructure:
+
+- **Docker & Docker Compose**: Multi-container setup with health checks
+- **Nginx**: Reverse proxy with rate limiting and SSL/TLS support
+- **Monitoring**: Health check endpoints and structured logging
+- **Security**: CORS, security headers, environment-based configuration
+- **Backups**: Automated database backup and restore scripts
+- **CI/CD**: GitHub Actions workflow for testing and building
+- **Documentation**: Comprehensive guides and troubleshooting
+
+### Deployment Options
+
+1. **Quick Deploy**: `make deploy` (see [QUICKSTART.md](QUICKSTART.md))
+2. **Production Deploy**: Follow [PRODUCTION.md](PRODUCTION.md) guide
+3. **Development**: `make dev-up` (database only, run code locally)
+
+### Available Commands
+
+```bash
+make help              # Show all commands
+make deploy            # Deploy to production
+make backup            # Backup database
+make logs              # View logs
+make health            # Check service health
+```
+
+See [Makefile](Makefile) for all available commands.
+
+## Documentation
+
+- **[QUICKSTART.md](QUICKSTART.md)** - Get started in 5 minutes
+- **[PRODUCTION.md](PRODUCTION.md)** - Complete production deployment guide
+- **[TODO.md](TODO.md)** - Roadmap and future features
+- **[docs/SETUP_GUIDE.md](docs/SETUP_GUIDE.md)** - Detailed setup instructions
+- **[docs/EXAMPLES.md](docs/EXAMPLES.md)** - API and AI chat examples
+- **[nginx/README.md](nginx/README.md)** - SSL/TLS configuration
+
 ## Notes
 
 - The AI agent requires a GGUF model file to function. Without it, the chat feature will display a warning message but the rest of the CRM will work normally.
 - For production use, consider using a more powerful LLM and adjusting the `MODEL_N_GPU_LAYERS` setting if you have GPU support.
 - The system uses local AI inference, ensuring data privacy and no external API dependencies.
+- All production infrastructure (Docker, nginx, monitoring, backups) is included and ready to use.
+
+## Contributing
+
+See [TODO.md](TODO.md) for planned features and how to contribute.
 
 ## License
 
