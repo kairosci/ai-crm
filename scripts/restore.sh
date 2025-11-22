@@ -31,9 +31,11 @@ if [ ! -f "${BACKUP_FILE}" ]; then
     exit 1
 fi
 
-# Load environment variables
+# Load environment variables safely
 if [ -f .env ]; then
-    export $(cat .env | grep -v '^#' | xargs)
+    set -a
+    source .env
+    set +a
 fi
 
 POSTGRES_USER="${POSTGRES_USER:-postgres}"

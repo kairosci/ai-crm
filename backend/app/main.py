@@ -12,13 +12,22 @@ from .services.ai_agent import ai_agent
 
 # Configure logging
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
+
+# Create logs directory if it doesn't exist
+log_dir = "logs"
+if not os.path.exists(log_dir):
+    os.makedirs(log_dir)
+
+# Setup logging handlers
+handlers = [
+    logging.StreamHandler(),
+    logging.FileHandler(os.path.join(log_dir, "app.log"))
+]
+
 logging.basicConfig(
     level=getattr(logging, LOG_LEVEL),
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.StreamHandler(),
-        logging.FileHandler("logs/app.log") if os.path.exists("logs") else logging.StreamHandler()
-    ]
+    handlers=handlers
 )
 logger = logging.getLogger(__name__)
 

@@ -20,8 +20,10 @@ if [ ! -f .env ]; then
     exit 1
 fi
 
-# Load environment variables
-export $(cat .env | grep -v '^#' | xargs)
+# Load environment variables safely
+set -a
+source .env
+set +a
 
 echo -e "${GREEN}✓${NC} Environment file loaded"
 
@@ -39,7 +41,8 @@ fi
 echo -e "${GREEN}✓${NC} Docker and Docker Compose are installed"
 
 # Check if postgres password is still default
-if grep -q "POSTGRES_PASSWORD=postgres" .env; then
+POSTGRES_PASS=$(grep "^POSTGRES_PASSWORD=" .env | cut -d'=' -f2- | tr -d ' "'\''')
+if [ "$POSTGRES_PASS" = "postgres" ]; then
     echo -e "${YELLOW}Warning: Using default PostgreSQL password${NC}"
     echo "It's highly recommended to change it in production"
     read -p "Continue anyway? (y/N) " -n 1 -r

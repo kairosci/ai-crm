@@ -20,7 +20,7 @@ engine = create_engine(
     max_overflow=20,  # Maximum number of connections that can be created beyond pool_size
     pool_pre_ping=True,  # Verify connections before using them
     pool_recycle=3600,  # Recycle connections after 1 hour
-    echo=os.getenv("PYTHON_ENV") != "production",  # Log SQL in development
+    echo=os.getenv("PYTHON_ENV", "development") != "production",  # Log SQL in development
 )
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
