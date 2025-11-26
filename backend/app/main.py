@@ -1,30 +1,61 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from contextlib import asynccontextmanager
+import logging
+import os
+import time
 
 from .database import init_db
 from .api.routes import router
 from .services.ai_agent import ai_agent
+
+# Configure logging
+LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
+
+# Create logs directory if it doesn't exist
+log_dir = "logs"
+os.makedirs(log_dir, exist_ok=True)
+
+# Setup logging handlers
+handlers = [
+    logging.StreamHandler(),
+    logging.FileHandler(os.path.join(log_dir, "app.log"))
+]
+
+logging.basicConfig(
+    level=getattr(logging, LOG_LEVEL),
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=handlers
+)
+logger = logging.getLogger(__name__)
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Lifespan event handler for startup and shutdown"""
     # Startup
-    print("Initializing database...")
-    init_db()
-    print("Database initialized.")
+    logger.info("Starting Enterprise CRM API...")
     
-    print("Initializing AI agent...")
+    logger.info("Initializing database...")
+    try:
+        init_db()
+        logger.info("Database initialized successfully.")
+    except Exception as e:
+        logger.error(f"Failed to initialize database: {e}")
+        raise
+    
+    logger.info("Initializing AI agent...")
     if ai_agent.initialize():
-        print("AI agent initialized successfully.")
+        logger.info("AI agent initialized successfully.")
     else:
-        print("AI agent initialization failed. Chat functionality will be limited.")
+        logger.warning("AI agent initialization failed. Chat functionality will be limited.")
     
+    logger.info("Application startup complete.")
     yield
     
     # Shutdown
-    print("Shutting down...")
+    logger.info("Shutting down application...")
 
 
 app = FastAPI(
@@ -35,13 +66,49 @@ app = FastAPI(
 )
 
 # CORS middleware
+allowed_origins = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000").split(",")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Request logging middleware
+@app.middleware("http")
+async def log_requests(request: Request, call_next):
+    start_time = time.time()
+    
+    # Log request
+    logger.info(f"Request: {request.method} {request.url.path}")
+    
+    try:
+        response = await call_next(request)
+        
+        # Log response
+        process_time = time.time() - start_time
+        logger.info(
+            f"Response: {request.method} {request.url.path} "
+            f"Status: {response.status_code} Duration: {process_time:.3f}s"
+        )
+        
+        return response
+    except Exception as e:
+        logger.error(f"Request failed: {request.method} {request.url.path} Error: {str(e)}")
+        return JSONResponse(
+            status_code=500,
+            content={"detail": "Internal server error"}
+        )
+
+# Global exception handler
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    logger.error(f"Unhandled exception: {exc}", exc_info=True)
+    return JSONResponse(
+        status_code=500,
+        content={"detail": "Internal server error"}
+    )
 
 # Include routes
 app.include_router(router, prefix="/api/v1", tags=["CRM"])
