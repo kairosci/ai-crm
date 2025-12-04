@@ -10,7 +10,7 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 justify-center">
         <Link href="/contacts" className="bg-white overflow-hidden shadow rounded-lg hover:shadow-md transition-shadow">
           <div className="p-5">
             <div className="flex items-center">
