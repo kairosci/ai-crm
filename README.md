@@ -44,16 +44,37 @@ Access at http://localhost
 
 The system uses a LangChain agent that loads a local GGUF model via llama-cpp-python. CRUD operations are exposed as LangChain Tools, enabling the AI to perform real database operations through function calling.
 
+## Quick Start with Makefile
+
+We provide a comprehensive Makefile to streamline development operations:
+
+```bash
+# Complete setup (installs dependencies, starts database)
+make setup
+
+# Start both backend and frontend development servers
+make dev
+
+# Or start them separately
+make dev-backend  # Backend on http://localhost:8000
+make dev-frontend # Frontend on http://localhost:3000
+
+# See all available commands
+make help
+```
+
 ## Setup Instructions
 
 ### Prerequisites
 
 - Python 3.10+
 - Node.js 18+
-- PostgreSQL 14+
-- GGUF model file (e.g., Llama 2, Mistral, or similar)
+- Docker (for PostgreSQL via docker-compose)
+- GGUF model file (optional, for AI features)
 
-### Backend Setup
+### Manual Setup (Alternative to Makefile)
+
+#### Backend Setup
 
 1. Navigate to the backend directory:
 ```bash
@@ -84,8 +105,9 @@ MODEL_N_CTX=2048
 MODEL_N_GPU_LAYERS=0
 ```
 
-6. Create the PostgreSQL database:
+6. Start PostgreSQL and create the database:
 ```bash
+docker compose up -d postgres
 createdb crm_db
 ```
 
@@ -101,7 +123,7 @@ python run.py
 The API will be available at http://localhost:8000
 API documentation at http://localhost:8000/docs
 
-### Frontend Setup
+#### Frontend Setup
 
 1. Navigate to the frontend directory:
 ```bash
@@ -217,6 +239,68 @@ The AI assistant can help you manage your CRM using natural language. Examples:
 - `POST /api/v1/chat` - Send a message to the AI assistant
 
 ## Development
+
+### Available Makefile Commands
+
+Run `make help` to see all available commands. Key commands include:
+
+**Setup and Installation:**
+```bash
+make install              # Install all dependencies (backend + frontend)
+make install-backend      # Install backend Python dependencies
+make install-frontend     # Install frontend Node dependencies
+make setup                # Complete project setup (install + db)
+```
+
+**Development:**
+```bash
+make dev                  # Run both backend and frontend in parallel
+make dev-backend          # Run backend development server only
+make dev-frontend         # Run frontend development server only
+```
+
+**Database:**
+```bash
+make db-start             # Start PostgreSQL using Docker
+make db-stop              # Stop PostgreSQL
+make db-create            # Create the CRM database
+make db-shell             # Open PostgreSQL shell
+```
+
+**Docker:**
+```bash
+make docker-up            # Start all services with docker-compose
+make docker-down          # Stop all services
+make docker-clean         # Stop and remove all containers and volumes
+```
+
+**Build:**
+```bash
+make build                # Build both backend and frontend
+make build-backend        # Validate backend code
+make build-frontend       # Build frontend for production
+```
+
+**Testing:**
+```bash
+make test                 # Run all tests
+make test-backend         # Run backend tests
+make test-frontend        # Run frontend tests
+```
+
+**Linting:**
+```bash
+make lint                 # Lint both backend and frontend
+make lint-backend         # Lint backend Python code
+make lint-frontend        # Lint frontend TypeScript code
+```
+
+**Cleaning:**
+```bash
+make clean                # Clean all build artifacts
+make clean-backend        # Clean backend artifacts
+make clean-frontend       # Clean frontend artifacts
+```
 
 ### Backend Structure
 ```
