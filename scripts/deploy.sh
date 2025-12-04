@@ -147,6 +147,6 @@ echo ""
 if [ ! -f "backend/models/model.gguf" ]; then
     echo -e "${YELLOW}Note: AI model not found at backend/models/model.gguf${NC}"
     echo "The CRM will work, but AI chat features will be limited."
-    echo "See PRODUCTION.md for instructions on adding a model."
+    echo "See docs/PRODUCTION.md for instructions on adding a model."
     echo ""
 fi
