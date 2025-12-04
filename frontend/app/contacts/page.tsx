@@ -28,7 +28,7 @@ export default function ContactsPage() {
       const data = await contactsApi.getAll();
       setContacts(data);
       setError(null);
-    } catch (err) {
+    } catch {
       setError('Failed to load contacts. Please check if the backend is running.');
     } finally {
       setIsLoading(false);
@@ -50,7 +50,7 @@ export default function ContactsPage() {
       });
       setShowForm(false);
       fetchContacts();
-    } catch (err) {
+    } catch {
       alert('Failed to create contact');
     }
   };

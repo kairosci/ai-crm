@@ -19,7 +19,7 @@ export default function TasksPage() {
       const data = await tasksApi.getAll();
       setTasks(data);
       setError(null);
-    } catch (err) {
+    } catch {
       setError('Failed to load tasks. Please check if the backend is running.');
     } finally {
       setIsLoading(false);
@@ -30,11 +30,11 @@ export default function TasksPage() {
     try {
       const newStatus = task.is_completed ? 'todo' : 'completed';
       await tasksApi.update(task.id, { 
-        status: newStatus as any,
+        status: newStatus,
         is_completed: !task.is_completed 
       });
       fetchTasks();
-    } catch (err) {
+    } catch {
       alert('Failed to update task');
     }
   };
@@ -131,7 +131,7 @@ export default function TasksPage() {
           <div className="p-8 text-center">
             <p className="text-gray-600">No tasks yet. Use the AI Chat to create a task!</p>
             <p className="text-sm text-gray-500 mt-2">
-              Try: "Create a task to follow up with contact ID 1"
+              Try: &quot;Create a task to follow up with contact ID 1&quot;
             </p>
           </div>
         ) : (

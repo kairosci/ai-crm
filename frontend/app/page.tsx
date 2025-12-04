@@ -10,7 +10,7 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 justify-center">
         <Link href="/contacts" className="bg-white overflow-hidden shadow rounded-lg hover:shadow-md transition-shadow">
           <div className="p-5">
             <div className="flex items-center">
@@ -64,24 +64,6 @@ export default function Home() {
             </div>
           </div>
         </Link>
-
-        <Link href="/chat" className="bg-white overflow-hidden shadow rounded-lg hover:shadow-md transition-shadow">
-          <div className="p-5">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <svg className="h-6 w-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                </svg>
-              </div>
-              <div className="ml-5 w-0 flex-1">
-                <dl>
-                  <dt className="text-sm font-medium text-gray-500 truncate">AI Chat</dt>
-                  <dd className="text-lg font-medium text-gray-900">Assist</dd>
-                </dl>
-              </div>
-            </div>
-          </div>
-        </Link>
       </div>
 
       <div className="bg-white shadow rounded-lg p-6">
@@ -97,7 +79,7 @@ export default function Home() {
             <strong>3. Manage Tasks:</strong> Create and assign tasks for follow-ups and activities.
           </p>
           <p>
-            <strong>4. Use AI Chat:</strong> Ask the AI assistant to help you manage your CRM with natural language commands.
+            <strong>4. Use AI Assistant:</strong> Click the AI assistant button in the bottom-right corner to get help with natural language commands anywhere in the app.
           </p>
         </div>
       </div>

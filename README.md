@@ -2,7 +2,7 @@
 
 An Enterprise CRM system built with Next.js, FastAPI, and PostgreSQL, featuring AI-powered chat assistance using local LLM via llama-cpp-python.
 
-## 🚀 Quick Start
+## Quick Start
 
 Get started in under 5 minutes with Docker:
 
@@ -15,16 +15,15 @@ make deploy
 
 Access at http://localhost
 
-📖 **See [QUICKSTART.md](QUICKSTART.md)** for detailed setup instructions  
-🏭 **See [PRODUCTION.md](PRODUCTION.md)** for production deployment
+**See [QUICKSTART.md](QUICKSTART.md)** for detailed setup instructions  
+**See [PRODUCTION.md](PRODUCTION.md)** for production deployment
 
 ## Features
 
 - **Contacts Management**: Add, view, and manage customer contacts
 - **Pipeline Tracking**: Organize deals through customizable sales pipelines
 - **Task Management**: Create and track tasks with priority levels
-- **AI Chat Assistant**: Natural language interface to manage CRM operations using local LLM (no external API required)
-- **Production Ready**: Docker, nginx, SSL/TLS, monitoring, backups
+- **AI Chat Plugin**: Floating AI assistant accessible from any page, with contextual suggestions and natural language interface to manage CRM operations using local LLM (no external API required)
 
 ## Technology Stack
 
@@ -170,7 +169,16 @@ The frontend will be available at http://localhost:3000
 - Linked to contact
 - Due dates and completion tracking
 
-## AI Chat Usage
+## AI Chat Plugin Usage
+
+The AI assistant is available as a floating plugin accessible from any page in the CRM. Click the blue chat button in the bottom-right corner to open the assistant.
+
+### Key Features
+- **Always Available**: Access the AI assistant from any page without navigation
+- **Contextual Suggestions**: Get relevant quick actions based on your current page
+- **Minimize/Maximize**: Collapse the chat to a compact header when not in use
+- **Notification Badge**: See unread message counts when the chat is minimized or closed
+- **Modern UI**: Smooth animations and gradient styling for a polished experience
 
 The AI assistant can help you manage your CRM using natural language. Examples:
 
@@ -325,12 +333,14 @@ backend/
 ```
 frontend/
 ├── app/
-│   ├── chat/            # AI chat page
+│   ├── chat/            # Legacy chat page (kept for direct access)
 │   ├── contacts/        # Contacts page
 │   ├── pipelines/       # Pipelines page
 │   ├── tasks/           # Tasks page
-│   ├── layout.tsx       # Root layout with navigation
+│   ├── layout.tsx       # Root layout with navigation and ChatPlugin
 │   └── page.tsx         # Home page
+├── components/
+│   └── ChatPlugin.tsx   # Floating AI chat plugin component
 └── lib/
     └── api.ts           # API client
 ```
