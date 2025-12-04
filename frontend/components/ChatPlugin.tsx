@@ -90,7 +90,8 @@ export default function ChatPlugin() {
       if (isMinimized || !isOpen) {
         setUnreadCount(prev => prev + 1);
       }
-    } catch {
+    } catch (error) {
+      console.error('Chat API error:', error);
       const errorMessage: Message = {
         role: 'assistant',
         content: 'Sorry, I encountered an error. Please make sure the backend is running and try again.'
