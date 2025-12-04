@@ -237,8 +237,10 @@ ai-crm/
 │   └── package.json
 ├── docker-compose.yml      # PostgreSQL
 ├── README.md
-├── SETUP_GUIDE.md
-└── EXAMPLES.md
+└── docs/
+    ├── SETUP_GUIDE.md
+    ├── EXAMPLES.md
+    └── IMPLEMENTATION_SUMMARY.md
 ```
 
 ## Dependencies
@@ -299,8 +301,8 @@ ai-crm/
 ## Documentation
 
 ✅ **README.md**: Overview, features, quick start
-✅ **SETUP_GUIDE.md**: Detailed setup, troubleshooting
-✅ **EXAMPLES.md**: API examples, AI chat patterns
+✅ **docs/SETUP_GUIDE.md**: Detailed setup, troubleshooting
+✅ **docs/EXAMPLES.md**: API examples, AI chat patterns
 ✅ **Code comments**: Inline documentation
 ✅ **API docs**: Auto-generated at /docs endpoint
 
