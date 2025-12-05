@@ -240,7 +240,7 @@ Key production steps:
 
 ## Next Steps
 
-- 📖 Read [README.md](README.md) for feature overview
+- 📖 Read [README.md](../README.md) for feature overview
 - 🔧 Read [PRODUCTION.md](PRODUCTION.md) for production deployment
 - ✅ Check [TODO.md](TODO.md) for roadmap and future features
 - 📚 Explore API at http://localhost/docs

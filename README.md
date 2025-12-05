@@ -15,8 +15,8 @@ make deploy
 
 Access at http://localhost
 
-**See [QUICKSTART.md](QUICKSTART.md)** for detailed setup instructions  
-**See [PRODUCTION.md](PRODUCTION.md)** for production deployment
+**See [QUICKSTART.md](docs/QUICKSTART.md)** for detailed setup instructions  
+**See [PRODUCTION.md](docs/PRODUCTION.md)** for production deployment
 
 ## Features
 
@@ -359,8 +359,8 @@ The project includes complete production infrastructure:
 
 ### Deployment Options
 
-1. **Quick Deploy**: `make deploy` (see [QUICKSTART.md](QUICKSTART.md))
-2. **Production Deploy**: Follow [PRODUCTION.md](PRODUCTION.md) guide
+1. **Quick Deploy**: `make deploy` (see [QUICKSTART.md](docs/QUICKSTART.md))
+2. **Production Deploy**: Follow [PRODUCTION.md](docs/PRODUCTION.md) guide
 3. **Development**: `make dev-up` (database only, run code locally)
 
 ### Available Commands
@@ -377,9 +377,9 @@ See [Makefile](Makefile) for all available commands.
 
 ## Documentation
 
-- **[QUICKSTART.md](QUICKSTART.md)** - Get started in 5 minutes
-- **[PRODUCTION.md](PRODUCTION.md)** - Complete production deployment guide
-- **[TODO.md](TODO.md)** - Roadmap and future features
+- **[QUICKSTART.md](docs/QUICKSTART.md)** - Get started in 5 minutes
+- **[PRODUCTION.md](docs/PRODUCTION.md)** - Complete production deployment guide
+- **[TODO.md](docs/TODO.md)** - Roadmap and future features
 - **[docs/SETUP_GUIDE.md](docs/SETUP_GUIDE.md)** - Detailed setup instructions
 - **[docs/EXAMPLES.md](docs/EXAMPLES.md)** - API and AI chat examples
 - **[nginx/README.md](nginx/README.md)** - SSL/TLS configuration
@@ -393,7 +393,7 @@ See [Makefile](Makefile) for all available commands.
 
 ## Contributing
 
-See [TODO.md](TODO.md) for planned features and how to contribute.
+See [TODO.md](docs/TODO.md) for planned features and how to contribute.
 
 ## License
 
